@@ -37,7 +37,7 @@ class ReferralController extends Controller
         ]);
     }
 
-    public function my(Request $request)
+    public function my(Request $request): JsonResponse
     {
         $master = $request->attributes->get('current_master');
 
@@ -58,5 +58,21 @@ class ReferralController extends Controller
             'referrals' => $referrals,
         ]);
 
+    }
+
+    public function earnings(Request $request): JsonResponse
+    {
+        $master = $request->attributes->get('current_master');
+
+        if (empty($master)) {
+            return response()->json(['error' => 'master not found'], 401);
+        }
+
+        return response()->json([
+            'total' => $master->referralEarnings()->sum('amount'),
+            'pending' => $master->referralEarnings()->where('status', ReferralEarning::STATUS_PENDING)->sum('amount'),
+            'paid' => $master->referralEarnings()->where('status', ReferralEarning::STATUS_PAID)->sum('amount'),
+            'counted' => $master->referrals()->active()->count(),
+        ]);
     }
 }

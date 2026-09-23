@@ -23,3 +23,4 @@ Route::post('/referrals/attach', 'App\Http\Controllers\ReferralController@attach
 // TODO: GET  /api/referrals/my
 Route::get('/referrals/my', 'App\Http\Controllers\ReferralController@my');
 // TODO: GET  /api/referrals/earnings
+Route::get('/referrals/earnings', 'App\Http\Controllers\ReferralController@earnings');
