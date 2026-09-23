@@ -21,4 +21,5 @@ Route::get('/ping', fn () => ['ok' => true]);
 // TODO: POST /api/referrals/attach
 Route::post('/referrals/attach', 'App\Http\Controllers\ReferralController@attach');
 // TODO: GET  /api/referrals/my
+Route::get('/referrals/my', 'App\Http\Controllers\ReferralController@my');
 // TODO: GET  /api/referrals/earnings
